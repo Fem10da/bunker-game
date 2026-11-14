@@ -1,0 +1,17 @@
+packages:
+  - apps/*
+  - packages/*
+
+allowBuilds:
+  esbuild: true
+  workerd: true
+
+engineStrict: true
+nodeVersion: 24.18.0
+
+overrides:
+  "brace-expansion@^5.0.0": 5.0.9
+  "fast-uri@^3.0.0": 3.1.5
+  "fast-uri@^4.0.0": 4.1.2
+  "nanoid@^3.0.0": 3.3.17
+  "undici@^7.0.0": 7.29.0

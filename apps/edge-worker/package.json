@@ -1,0 +1,24 @@
+{
+  "name": "@bunker/edge-worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "pnpm --filter @bunker/web build && wrangler deploy --env staging --dry-run --outdir dist",
+    "deploy:staging": "pnpm --filter @bunker/web build && wrangler deploy --env staging",
+    "dev": "wrangler dev",
+    "logs:staging": "wrangler tail --env staging --format pretty",
+    "logs:staging:errors": "wrangler tail --env staging --status error --format pretty",
+    "logs:staging:json": "wrangler tail --env staging --format json",
+    "logs:production": "wrangler tail --env production --format pretty",
+    "logs:production:errors": "wrangler tail --env production --status error --format pretty",
+    "typecheck": "wrangler types src/worker-configuration.d.ts --check && tsc -p tsconfig.json --noEmit",
+    "types": "wrangler types src/worker-configuration.d.ts"
+  },
+  "dependencies": {
+    "hono": "^4.12.34"
+  },
+  "devDependencies": {
+    "wrangler": "^4.114.0"
+  }
+}

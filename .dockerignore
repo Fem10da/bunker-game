@@ -1,0 +1,15 @@
+.git
+.github
+.wrangler
+coverage
+node_modules
+**/dist
+**/node_modules
+.env
+.env.*
+!.env.example
+*.log
+*.tsbuildinfo
+.DS_Store
+backups
+data

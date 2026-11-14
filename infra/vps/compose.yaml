@@ -1,0 +1,75 @@
+name: ${COMPOSE_PROJECT_NAME:-bunker}
+
+services:
+  postgres:
+    image: postgres:18.4-bookworm
+    restart: unless-stopped
+    stop_grace_period: 60s
+    environment:
+      PGDATA: /var/lib/postgresql/18/docker
+      POSTGRES_DB: ${POSTGRES_DB:?POSTGRES_DB is required}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+      POSTGRES_USER: ${POSTGRES_USER:?POSTGRES_USER is required}
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    networks:
+      - data
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    logging:
+      driver: json-file
+      options:
+        max-file: "5"
+        max-size: 10m
+    security_opt:
+      - no-new-privileges:true
+
+  backend:
+    image: bunker-backend:${BUNKER_IMAGE_TAG:-local}
+    build:
+      context: ../..
+      dockerfile: infra/vps/Dockerfile
+    restart: unless-stopped
+    init: true
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: ${DATABASE_URL:?DATABASE_URL is required}
+      HOST: 0.0.0.0
+      ORIGIN_SERVICE_TOKEN: ${ORIGIN_SERVICE_TOKEN:?ORIGIN_SERVICE_TOKEN is required}
+      PORT: 3000
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:?TELEGRAM_BOT_TOKEN is required}
+    ports:
+      - "127.0.0.1:${BUNKER_HTTP_PORT:-3301}:3000"
+    networks:
+      - data
+      - egress
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: json-file
+      options:
+        max-file: "5"
+        max-size: 10m
+
+networks:
+  data:
+    internal: true
+  egress:
+
+volumes:
+  postgres_data:

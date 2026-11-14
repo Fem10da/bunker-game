@@ -1,0 +1,13 @@
+[Unit]
+Description=Bunker PostgreSQL backup
+Requires=docker.service
+After=docker.service
+ConditionPathExists=/opt/bunker/shared/.env.production
+
+[Service]
+Type=oneshot
+User=bunker
+Group=bunker
+WorkingDirectory=/opt/bunker/repo
+ExecStart=/opt/bunker/repo/scripts/backup-postgres.sh
+UMask=0077

@@ -1,0 +1,1691 @@
+ageRating: 16+
+bunker:
+  capacityRule: ceil_half
+  description: "Покинута підземна база корпорації, що створювала динозаврів. Частина систем працює, лабораторія й зовнішні модулі пошкоджені."
+cards[47]:
+  - description: Відкрийте ще одну власну закриту характеристику.
+    effectId: characteristic.reveal_extra
+    id: open-file
+    kind: action
+    scope: common
+    selection[1]: characteristic
+    target: self
+    timing: own_phase
+    title: Відкрите досьє
+  - description: Знову закрийте одну раніше відкриту власну характеристику.
+    effectId: characteristic.hide
+    id: sealed-file
+    kind: action
+    scope: common
+    selection[1]: characteristic
+    target: self
+    timing: own_phase
+    title: Засекречене досьє
+  - description: Поміняйтеся багажем з обраним активним гравцем.
+    effectId: player.swap_baggage
+    id: baggage-exchange
+    kind: action
+    scope: common
+    selection[1]: target_player
+    target: any_non_afk_player
+    timing: own_phase
+    title: Обмін багажем
+  - description: Поміняйтеся професією з обраним активним гравцем.
+    effectId: player.swap_profession
+    id: profession-exchange
+    kind: action
+    scope: common
+    selection[1]: target_player
+    target: any_non_afk_player
+    timing: own_phase
+    title: Зміна спеціальності
+  - description: Захистіть себе від вибору під час наступного голосування.
+    effectId: vote.block
+    id: vote-veto
+    kind: reaction
+    scope: common
+    selection: []
+    target: self
+    timing: reaction_window
+    title: Право вето
+  - description: Ваш голос у наступному голосуванні рахується двічі.
+    effectId: vote.double
+    id: double-vote
+    kind: action
+    scope: common
+    selection: []
+    target: self
+    timing: own_phase
+    title: Подвійний голос
+  - description: Перенаправте дію на іншого активного гравця.
+    effectId: vote.redirect
+    id: redirect
+    kind: reaction
+    scope: common
+    selection[1]: target_player
+    target: any_non_afk_player
+    timing: reaction_window
+    title: Зміна адресата
+  - description: Скасуйте щойно розіграну картку дії.
+    effectId: card.cancel
+    id: countermeasure
+    kind: reaction
+    scope: common
+    selection: []
+    target: game
+    timing: reaction_window
+    title: Контрзахід
+  - description: Повторіть ефект щойно розіграної картки дії.
+    effectId: card.copy
+    id: mirror-protocol
+    kind: reaction
+    scope: common
+    selection: []
+    target: game
+    timing: reaction_window
+    title: Дзеркальний протокол
+  - description: Отримайте копію однієї вже використаної картки.
+    effectId: card.recover
+    id: reserve-copy
+    kind: action
+    scope: common
+    selection: []
+    target: self
+    timing: own_phase
+    title: Резервна копія
+  - description: Продовжте поточний хід на 30 секунд.
+    effectId: time.extend
+    id: extra-minute
+    kind: action
+    scope: common
+    selection: []
+    target: self
+    timing: own_phase
+    title: Додатковий час
+  - description: Скоротіть наступний хід обраного гравця на 30 секунд.
+    effectId: time.reduce
+    id: time-pressure
+    kind: action
+    scope: common
+    selection[1]: target_player
+    target: any_non_afk_player
+    timing: own_phase
+    title: Тиск часу
+  - description: Таємно перегляньте закриту характеристику іншого гравця.
+    effectId: characteristic.inspect
+    id: private-review
+    kind: action
+    scope: common
+    selection[2]: target_player,characteristic
+    target: any_non_afk_player
+    timing: own_phase
+    title: Приватна перевірка
+  - description: "Якщо дія спрямована на вас, скасуйте її вплив на себе."
+    effectId: player.protect
+    id: temporary-immunity
+    kind: reaction
+    scope: common
+    selection: []
+    target: self
+    timing: reaction_window
+    title: Тимчасовий імунітет
+  - description: Публічно відкрийте вибрану характеристику іншого гравця.
+    effectId: characteristic.force_reveal
+    id: forced-disclosure
+    kind: action
+    scope: common
+    selection[2]: target_player,characteristic
+    target: any_non_afk_player
+    timing: own_phase
+    title: Примусове розкриття
+  - description: Перегенеруйте одну власну закриту характеристику.
+    effectId: characteristic.reroll_unrevealed
+    id: new-file
+    kind: action
+    scope: common
+    selection[1]: characteristic
+    target: self
+    timing: own_phase
+    title: Нове досьє
+  - description: Поставте обраного гравця наступним у черзі цього раунду.
+    effectId: order.swap
+    id: change-order
+    kind: action
+    scope: common
+    selection[1]: target_player
+    target: any_non_afk_player
+    timing: own_phase
+    title: Зміна черговості
+  - description: Замініть цю картку випадковою невиданою карткою.
+    effectId: card.draw
+    id: second-copy
+    kind: action
+    scope: common
+    selection: []
+    target: self
+    timing: own_phase
+    title: Другий примірник
+  - description: Додайте один автоматичний голос проти обраного гравця.
+    effectId: vote.add
+    id: public-accusation
+    kind: action
+    scope: common
+    selection[1]: target_player
+    target: any_non_afk_player
+    timing: own_phase
+    title: Публічне звинувачення
+  - description: "Приберіть один голос, поданий проти вас у наступному голосуванні."
+    effectId: vote.remove
+    id: documented-alibi
+    kind: reaction
+    scope: common
+    selection: []
+    target: self
+    timing: reaction_window
+    title: Задокументоване алібі
+  - description: Зробіть проміжні голоси публічними до завершення раунду.
+    effectId: vote.reveal_total
+    id: sealed-ballot
+    kind: reaction
+    scope: common
+    selection: []
+    target: game
+    timing: reaction_window
+    title: Опечатана урна
+  - description: Поверніть одного виключеного гравця до активної групи.
+    effectId: player.revive
+    id: first-aid
+    kind: action
+    scope: common
+    selection[1]: target_player
+    target: eliminated_player
+    timing: own_phase
+    title: Перша допомога
+  - description: Продовжте поточний хід на 30 секунд.
+    effectId: time.extend
+    id: calm-command
+    kind: action
+    scope: common
+    selection: []
+    target: game
+    timing: own_phase
+    title: Спокійна команда
+  - description: Скасуйте щойно розіграну картку дії.
+    effectId: card.cancel
+    id: compromise
+    kind: reaction
+    scope: common
+    selection: []
+    target: game
+    timing: reaction_window
+    title: Компроміс
+  - description: Захистіть обраного гравця від наступного голосування.
+    effectId: player.protect
+    id: temporary-alliance
+    kind: action
+    scope: common
+    selection[1]: target_player
+    target: any_non_afk_player
+    timing: own_phase
+    title: Тимчасовий союз
+  - description: Додайте 60 секунд до ходу після завершення вікна реакції.
+    effectId: game.pause_request
+    id: emergency-pause
+    kind: reaction
+    scope: common
+    selection: []
+    target: game
+    timing: reaction_window
+    title: Аварійна пауза
+  - description: Поміняйте вибрану характеристику з іншим активним гравцем.
+    effectId: characteristic.swap
+    id: swap-facts
+    kind: action
+    scope: common
+    selection[2]: target_player,characteristic
+    target: any_non_afk_player
+    timing: own_phase
+    title: Обмін фактами
+  - description: Перенаправте дію на іншого активного гравця.
+    effectId: vote.redirect
+    id: last-argument
+    kind: reaction
+    scope: common
+    selection[1]: target_player
+    target: any_non_afk_player
+    timing: reaction_window
+    title: Останній аргумент
+  - description: Поміняйтесь обраною характеристикою з іншим активним гравцем.
+    effectId: characteristic.swap
+    id: paper-trail-swap
+    kind: action
+    scope: common
+    selection[2]: target_player,characteristic
+    target: any_non_afk_player
+    timing: own_phase
+    title: Обмін документами
+  - description: Отримайте копію однієї вже використаної картки.
+    effectId: card.recover
+    id: second-attempt
+    kind: action
+    scope: common
+    selection: []
+    target: self
+    timing: own_phase
+    title: Друга спроба
+  - description: Додайте один автоматичний голос проти обраного гравця.
+    effectId: vote.add
+    id: leaked-file
+    kind: action
+    scope: common
+    selection[1]: target_player
+    target: any_non_afk_player
+    timing: own_phase
+    title: Компромат
+  - description: Захистіть обраного гравця від наступного голосування.
+    effectId: player.protect
+    id: cover-story
+    kind: action
+    scope: common
+    selection[1]: target_player
+    target: any_non_afk_player
+    timing: own_phase
+    title: Прикриття
+  - description: Захистіть себе від вибору під час наступного голосування.
+    effectId: vote.block
+    id: unbreakable-alibi
+    kind: reaction
+    scope: common
+    selection: []
+    target: self
+    timing: reaction_window
+    title: Незламне алібі
+  - description: "Приберіть один голос, поданий проти вас у наступному голосуванні."
+    effectId: vote.remove
+    id: clean-record
+    kind: reaction
+    scope: common
+    selection: []
+    target: self
+    timing: reaction_window
+    title: Чисте досьє
+  - description: Замініть цю картку випадковою невиданою карткою.
+    effectId: card.draw
+    id: fresh-deck
+    kind: action
+    scope: common
+    selection: []
+    target: self
+    timing: own_phase
+    title: Нова колода
+  - description: Поставте обраного гравця наступним у черзі цього раунду.
+    effectId: order.swap
+    id: cut-the-line
+    kind: action
+    scope: common
+    selection[1]: target_player
+    target: any_non_afk_player
+    timing: own_phase
+    title: Пропуск черги
+  - description: Таємно перегляньте закриту характеристику іншого гравця.
+    effectId: characteristic.inspect
+    id: surveillance
+    kind: action
+    scope: common
+    selection[2]: target_player,characteristic
+    target: any_non_afk_player
+    timing: own_phase
+    title: Стеження
+  - description: До кінця раунду ніхто не може вголос аргументувати свій голос — лише мовчазне голосування.
+    effectId: time.extend
+    id: silent-vote
+    kind: reaction
+    scope: common
+    selection: []
+    target: game
+    timing: reaction_window
+    title: Мовчання
+  - description: "Уголос назвіть одну зі своїх закритих характеристик — не відкриваючи її офіційно. Правда це чи блеф, вирішує стіл."
+    effectId: time.extend
+    id: public-bluff
+    kind: action
+    scope: common
+    selection: []
+    target: self
+    timing: own_phase
+    title: Публічний блеф
+  - description: Повторіть ефект щойно розіграної картки дії.
+    effectId: card.copy
+    id: double-strike
+    kind: reaction
+    scope: common
+    selection: []
+    target: game
+    timing: reaction_window
+    title: Повторний удар
+  - description: Знову закрийте одну раніше відкриту власну характеристику.
+    effectId: characteristic.hide
+    id: re-sealed-file
+    kind: action
+    scope: common
+    selection[1]: characteristic
+    target: self
+    timing: own_phase
+    title: Повторне засекречення
+  - description: Публічно відкрийте вибрану характеристику іншого гравця.
+    effectId: characteristic.force_reveal
+    id: information-leak
+    kind: action
+    scope: common
+    selection[2]: target_player,characteristic
+    target: any_non_afk_player
+    timing: own_phase
+    title: Витік інформації
+  - description: Відкрийте ще одну власну закриту характеристику.
+    effectId: characteristic.reveal_extra
+    id: second-dossier
+    kind: action
+    scope: common
+    selection[1]: characteristic
+    target: self
+    timing: own_phase
+    title: Друге досьє
+  - description: Поверніть одного виключеного гравця до активної групи.
+    effectId: player.revive
+    id: second-wind
+    kind: action
+    scope: common
+    selection[1]: target_player
+    target: eliminated_player
+    timing: own_phase
+    title: Друге дихання
+  - description: Голос обраного гравця не враховується в цьому голосуванні.
+    effectId: vote.silence
+    id: discredit
+    kind: action
+    scope: common
+    selection[1]: target_player
+    target: any_non_afk_player
+    timing: own_phase
+    title: Дискредитація
+  - description: Примусово перегенеруйте вже відкриту характеристику іншого гравця.
+    effectId: characteristic.force_reroll
+    id: fake-diploma
+    kind: action
+    scope: common
+    selection[2]: target_player,characteristic
+    target: any_non_afk_player
+    timing: own_phase
+    title: Фейковий диплом
+  - description: Обраний гравець отримує репродуктивну здатність — це може допомогти пройти демографію.
+    effectId: characteristic.cure_infertility
+    id: good-pills
+    kind: action
+    scope: common
+    selection[1]: target_player
+    target: any_non_afk_player
+    timing: own_phase
+    title: Хороші пігулки
+categories[14]:
+  - id: profession
+    label: Професія
+    values[32]:
+      - id: hoa-chat-admin
+        label: Адміністратор чату ОСББ
+        rarity: common
+        tags[1]: social
+        weight: 1
+      - id: peak-crypto-trader
+        label: "Криптотрейдер, який зайшов на піку"
+        rarity: common
+        tags[1]: finance
+        weight: 1
+      - id: webinar-survival-coach
+        label: Коуч із виживання після трьох вебінарів
+        rarity: common
+        tags[1]: survival
+        weight: 1
+      - id: duct-tape-repairer
+        label: Майстер ремонту всього армованим скотчем
+        rarity: common
+        tags[2]: technical,repair
+        weight: 1
+      - id: snail-veterinarian
+        label: Ветеринар екзотичних равликів
+        rarity: common
+        tags[2]: medicine,animals
+        weight: 1
+      - id: go-bag-influencer
+        label: Інфлюенсер з оглядів тривожних валіз
+        rarity: common
+        tags[1]: social
+        weight: 1
+      - id: ration-taster
+        label: Дегустатор сухпайків
+        rarity: common
+        tags[1]: food
+        weight: 1
+      - id: apocalypse-accountant
+        label: Бухгалтер апокаліпсису
+        rarity: common
+        tags[2]: finance,logistics
+        weight: 1
+      - id: small-event-host
+        label: Тамада для дуже камерних подій
+        rarity: common
+        tags[1]: social
+        weight: 1
+      - id: empty-drone-operator
+        label: Оператор дрона з розрядженим пультом
+        rarity: common
+        tags[2]: technical,observation
+        weight: 1
+      - id: system-administrator
+        label: Системний адміністратор
+        rarity: common
+        tags[1]: technical
+        weight: 1
+      - id: taxidermist
+        label: Таксидерміст
+        rarity: common
+        tags[2]: animals,craft
+        weight: 1
+      - id: trading-quality-auditor
+        label: Trading Quality Auditor
+        rarity: common
+        tags[2]: finance,observation
+        weight: 1
+      - id: street-racer
+        label: Вуличний гонщик
+        rarity: common
+        tags[1]: mobility
+        weight: 1
+      - id: third-wave-barista
+        label: Бариста третьої хвилі
+        rarity: common
+        tags[2]: food,social
+        weight: 1
+      - id: paleontologist
+        label: Палеонтолог
+        rarity: common
+        tags[2]: science,dinosaurs
+        weight: 1
+      - id: veterinarian
+        label: Ветеринар
+        rarity: common
+        tags[2]: medicine,animals
+        weight: 1
+      - id: geneticist
+        label: Генетик
+        rarity: common
+        tags[3]: science,genetics,laboratory
+        weight: 1
+      - id: electrical-engineer
+        label: Інженер-електрик
+        rarity: common
+        tags[2]: technical,energy
+        weight: 1
+      - id: mechanical-engineer
+        label: Інженер-механік
+        rarity: common
+        tags[2]: technical,repair
+        weight: 1
+      - id: emergency-doctor
+        label: Лікар невідкладної допомоги
+        rarity: common
+        tags[2]: medicine,leadership
+        weight: 1
+      - id: surgeon
+        label: Хірург
+        rarity: common
+        tags[2]: medicine,precision
+        weight: 1
+      - id: botanist
+        label: Ботанік
+        rarity: common
+        tags[2]: science,agriculture
+        weight: 1
+      - id: chemist
+        label: Хімік-технолог
+        rarity: common
+        tags[3]: science,chemistry,laboratory
+        weight: 1
+      - id: survival-instructor
+        label: Інструктор із виживання
+        rarity: common
+        tags[2]: survival,leadership
+        weight: 1
+      - id: radio-engineer
+        label: Радіоінженер
+        rarity: common
+        tags[2]: technical,communications
+        weight: 1
+      - id: geologist
+        label: Геолог
+        rarity: common
+        tags[2]: science,exploration
+        weight: 1
+      - id: cook-technologist
+        label: Кухар-технолог
+        rarity: common
+        tags[2]: food,logistics
+        weight: 1
+      - id: logistics-coordinator
+        label: Координатор логістики
+        rarity: common
+        tags[2]: logistics,leadership
+        weight: 1
+      - id: fertility-specialist
+        label: Репродуктолог
+        rarity: common
+        tags[2]: medicine,genetics
+        weight: 1
+      - id: sexologist
+        label: Сексолог
+        rarity: common
+        tags[2]: medicine,social
+        weight: 1
+      - id: tattoo-artist
+        label: Тату-майстер
+        rarity: common
+        tags[2]: craft,social
+        weight: 1
+  - id: age-gender
+    label: Вік і стать
+    values[14]:
+      - id: woman-18
+        label: "Жінка, 18 років"
+        rarity: common
+        tags[2]: "age:young","gender:woman"
+        weight: 1
+      - id: man-21
+        label: "Чоловік, 21 рік"
+        rarity: common
+        tags[2]: "age:young","gender:man"
+        weight: 1
+      - id: nonbinary-24
+        label: "Небінарна людина, 24 роки"
+        rarity: uncommon
+        tags[2]: "age:young","gender:nonbinary"
+        weight: 1
+      - id: woman-28
+        label: "Жінка, 28 років"
+        rarity: common
+        tags[2]: "age:adult","gender:woman"
+        weight: 1
+      - id: man-31
+        label: "Чоловік, 31 рік"
+        rarity: common
+        tags[2]: "age:adult","gender:man"
+        weight: 1
+      - id: woman-35
+        label: "Жінка, 35 років"
+        rarity: common
+        tags[2]: "age:adult","gender:woman"
+        weight: 1
+      - id: man-39
+        label: "Чоловік, 39 років"
+        rarity: common
+        tags[2]: "age:adult","gender:man"
+        weight: 1
+      - id: woman-43
+        label: "Жінка, 43 роки"
+        rarity: common
+        tags[2]: "age:adult","gender:woman"
+        weight: 1
+      - id: man-48
+        label: "Чоловік, 48 років"
+        rarity: common
+        tags[2]: "age:mature","gender:man"
+        weight: 1
+      - id: woman-53
+        label: "Жінка, 53 роки"
+        rarity: common
+        tags[2]: "age:mature","gender:woman"
+        weight: 1
+      - id: man-58
+        label: "Чоловік, 58 років"
+        rarity: common
+        tags[2]: "age:mature","gender:man"
+        weight: 1
+      - id: woman-64
+        label: "Жінка, 64 роки"
+        rarity: common
+        tags[2]: "age:senior","gender:woman"
+        weight: 1
+      - id: man-70
+        label: "Чоловік, 70 років"
+        rarity: common
+        tags[2]: "age:senior","gender:man"
+        weight: 1
+      - id: woman-76
+        label: "Жінка, 76 років"
+        rarity: uncommon
+        tags[2]: "age:senior","gender:woman"
+        weight: 1
+  - id: health
+    label: Здоров’я
+    values[14]:
+      - id: excellent-health
+        label: Повністю здоровий організм
+        rarity: rare
+        tags[1]: "health:excellent"
+        weight: 1
+      - id: myopia
+        label: "Короткозорість, є запасні окуляри"
+        rarity: common
+        tags[2]: "health:stable",vision
+        weight: 1
+      - id: controlled-asthma
+        label: Контрольована астма
+        rarity: common
+        tags[2]: "health:chronic",respiratory
+        weight: 1
+      - id: controlled-diabetes
+        label: "Діабет, запас інсуліну на шість місяців"
+        rarity: uncommon
+        tags[2]: "health:chronic",medicine-dependent
+        weight: 1
+      - id: partial-hearing-loss
+        label: Часткова втрата слуху
+        rarity: common
+        tags[2]: "health:stable",hearing
+        weight: 1
+      - id: severe-allergy
+        label: Сильна алергія на укуси комах
+        rarity: common
+        tags[2]: "health:risk",allergy
+        weight: 1
+      - id: healed-fracture
+        label: Старий перелом ноги нагадує про себе
+        rarity: common
+        tags[2]: "health:stable",mobility-limited
+        weight: 1
+      - id: migraine
+        label: Напади мігрені від яскравого світла
+        rarity: common
+        tags[2]: "health:chronic",light-sensitive
+        weight: 1
+      - id: hypertension
+        label: Гіпертонія під медикаментозним контролем
+        rarity: common
+        tags[2]: "health:chronic",medicine-dependent
+        weight: 1
+      - id: epilepsy
+        label: "Епілепсія, стабільна ремісія"
+        rarity: uncommon
+        tags[2]: "health:chronic",medicine-dependent
+        weight: 1
+      - id: leg-prosthesis
+        label: "Протез гомілки, впевнено пересувається"
+        rarity: uncommon
+        tags[2]: "health:stable",prosthesis
+        weight: 1
+      - id: chronic-insomnia
+        label: Хронічне безсоння
+        rarity: common
+        tags[2]: "health:chronic",sleep
+        weight: 1
+      - id: cancer-remission
+        label: Онкологічне захворювання в ремісії
+        rarity: rare
+        tags[2]: "health:risk",medicine-dependent
+        weight: 1
+      - id: blood-clotting-disorder
+        label: Порушення згортання крові
+        rarity: rare
+        tags[2]: "health:risk",bleeding
+        weight: 1
+  - id: hobby
+    label: Хобі
+    values[14]:
+      - id: birdwatching
+        label: Спостереження за птахами
+        rarity: common
+        tags[2]: animals,observation
+        weight: 1
+      - id: rock-climbing
+        label: Скелелазіння
+        rarity: common
+        tags[2]: mobility,survival
+        weight: 1
+      - id: amateur-radio
+        label: Аматорський радіозв’язок
+        rarity: common
+        tags[2]: communications,technical
+        weight: 1
+      - id: fermentation
+        label: Домашня ферментація продуктів
+        rarity: common
+        tags[2]: food,chemistry
+        weight: 1
+      - id: board-games
+        label: Складні настільні ігри
+        rarity: common
+        tags[2]: strategy,social
+        weight: 1
+      - id: gardening
+        label: Садівництво
+        rarity: common
+        tags[2]: agriculture,food
+        weight: 1
+      - id: drone-building
+        label: Збирання дронів
+        rarity: common
+        tags[2]: technical,electronics
+        weight: 1
+      - id: archery
+        label: Стрільба з лука
+        rarity: common
+        tags[2]: combat,precision
+        weight: 1
+      - id: sewing
+        label: Шиття й ремонт одягу
+        rarity: common
+        tags[2]: craft,repair
+        weight: 1
+      - id: cave-exploration
+        label: Дослідження печер
+        rarity: uncommon
+        tags[2]: exploration,survival
+        weight: 1
+      - id: chess
+        label: Шахи
+        rarity: common
+        tags[2]: strategy,focus
+        weight: 1
+      - id: fishing
+        label: Риболовля
+        rarity: common
+        tags[2]: food,survival
+        weight: 1
+      - id: documentary-photography
+        label: Документальна фотографія
+        rarity: common
+        tags[2]: observation,history
+        weight: 1
+      - id: historical-reenactment
+        label: Історична реконструкція
+        rarity: common
+        tags[2]: craft,combat
+        weight: 1
+  - id: phobia
+    label: Фобія
+    values[14]:
+      - id: dinophobia
+        label: Панічний страх динозаврів
+        rarity: rare
+        tags[1]: "fear:dinosaurs"
+        weight: 1
+      - id: claustrophobia
+        label: Клаустрофобія
+        rarity: common
+        tags[1]: "fear:enclosed"
+        weight: 1
+      - id: nyctophobia
+        label: Страх темряви
+        rarity: common
+        tags[1]: "fear:darkness"
+        weight: 1
+      - id: hemophobia
+        label: Страх крові
+        rarity: common
+        tags[1]: "fear:blood"
+        weight: 1
+      - id: acrophobia
+        label: Страх висоти
+        rarity: common
+        tags[1]: "fear:height"
+        weight: 1
+      - id: germophobia
+        label: Страх інфекцій і бруду
+        rarity: common
+        tags[1]: "fear:contamination"
+        weight: 1
+      - id: thalassophobia
+        label: Страх глибокої води
+        rarity: common
+        tags[1]: "fear:water"
+        weight: 1
+      - id: entomophobia
+        label: Страх комах
+        rarity: common
+        tags[1]: "fear:insects"
+        weight: 1
+      - id: pyrophobia
+        label: Страх вогню
+        rarity: common
+        tags[1]: "fear:fire"
+        weight: 1
+      - id: monophobia
+        label: Страх залишитися на самоті
+        rarity: common
+        tags[1]: "fear:alone"
+        weight: 1
+      - id: technophobia
+        label: Недовіра до складної техніки
+        rarity: common
+        tags[1]: "fear:technology"
+        weight: 1
+      - id: no-known-phobia
+        label: Виражених фобій немає
+        rarity: uncommon
+        tags[1]: "fear:none"
+        weight: 1
+      - id: loud-noise-fear
+        label: Страх різких гучних звуків
+        rarity: common
+        tags[1]: "fear:noise"
+        weight: 1
+      - id: underground-fear
+        label: Страх підземних споруд
+        rarity: common
+        tags[1]: "fear:underground"
+        weight: 1
+  - id: baggage
+    label: Багаж
+    values[14]:
+      - id: first-aid-kit
+        label: Розширена аптечка
+        rarity: common
+        tags[2]: medicine,supplies
+        weight: 1
+      - id: solar-battery
+        label: Складана сонячна батарея
+        rarity: uncommon
+        tags[2]: energy,technical
+        weight: 1
+      - id: field-microscope
+        label: Польовий мікроскоп
+        rarity: common
+        tags[2]: science,laboratory
+        weight: 1
+      - id: precision-toolbox
+        label: Набір точних інструментів
+        rarity: common
+        tags[2]: technical,repair
+        weight: 1
+      - id: heritage-seeds
+        label: Контейнер насіння культурних рослин
+        rarity: uncommon
+        tags[2]: agriculture,food
+        weight: 1
+      - id: radio-set
+        label: Короткохвильова радіостанція
+        rarity: common
+        tags[2]: communications,technical
+        weight: 1
+      - id: climbing-rope
+        label: П’ятдесят метрів альпіністської мотузки
+        rarity: common
+        tags[2]: mobility,survival
+        weight: 1
+      - id: water-filter
+        label: Портативний фільтр для води
+        rarity: common
+        tags[2]: water,survival
+        weight: 1
+      - id: antibiotics
+        label: Курс антибіотиків широкого спектра
+        rarity: uncommon
+        tags[2]: medicine,supplies
+        weight: 1
+      - id: recon-drone
+        label: Розвідувальний дрон із двома батареями
+        rarity: rare
+        tags[2]: observation,electronics
+        weight: 1
+      - id: offline-tablet
+        label: Захищений планшет з офлайн-енциклопедією
+        rarity: uncommon
+        tags[2]: knowledge,electronics
+        weight: 1
+      - id: chef-knives
+        label: Набір професійних кухонних ножів
+        rarity: common
+        tags[2]: food,tools
+        weight: 1
+      - id: firestarter
+        label: Вогниво й водостійкі розпалювачі
+        rarity: common
+        tags[2]: fire,survival
+        weight: 1
+      - id: unknown-sample
+        label: Герметичний контейнер із невідомим біоматеріалом
+        rarity: rare
+        tags[2]: mystery,laboratory
+        weight: 1
+  - id: fact
+    label: Додатковий факт
+    values[14]:
+      - id: antarctic-station
+        label: Провів рік на антарктичній станції
+        rarity: uncommon
+        tags[2]: isolation,survival
+        weight: 1
+      - id: corporate-whistleblower
+        label: Викрив незаконний експеримент корпорації
+        rarity: rare
+        tags[2]: company,secrets
+        weight: 1
+      - id: perfect-memory
+        label: Має майже фотографічну пам’ять
+        rarity: rare
+        tags[2]: knowledge,observation
+        weight: 1
+      - id: lies-under-pressure
+        label: Починає брехати під сильним тиском
+        rarity: common
+        tags[2]: "social:risk",secrets
+        weight: 1
+      - id: former-volunteer
+        label: Координував волонтерський штаб
+        rarity: common
+        tags[2]: leadership,logistics
+        weight: 1
+      - id: lab-accident
+        label: Пережив серйозну лабораторну аварію
+        rarity: common
+        tags[2]: laboratory,trauma
+        weight: 1
+      - id: survival-show
+        label: Переміг у телевізійному шоу про виживання
+        rarity: common
+        tags[2]: survival,social
+        weight: 1
+      - id: dinosaur-expert-child
+        label: З дитинства знає сотні видів динозаврів
+        rarity: common
+        tags[2]: dinosaurs,knowledge
+        weight: 1
+      - id: security-clearance
+        label: Колись мав високий рівень корпоративного допуску
+        rarity: uncommon
+        tags[2]: company,security
+        weight: 1
+      - id: secret-debt
+        label: Приховує великий борг перед іншим учасником
+        rarity: common
+        tags[2]: "social:risk",secrets
+        weight: 1
+      - id: three-days-awake
+        label: Не спав три доби перед аномалією
+        rarity: common
+        tags[2]: fatigue,"health:risk"
+        weight: 1
+      - id: wild-animal-rescue
+        label: Брав участь у порятунку великих хижаків
+        rarity: common
+        tags[2]: animals,medicine
+        weight: 1
+      - id: bunker-blueprints
+        label: Перед катастрофою бачив схему схожого бункера
+        rarity: rare
+        tags[2]: bunker,knowledge
+        weight: 1
+      - id: improvised-community
+        label: Створив самоврядну спільноту після стихійного лиха
+        rarity: uncommon
+        tags[2]: leadership,social
+        weight: 1
+  - id: skills
+    label: Навички
+    values[14]:
+      - id: advanced-first-aid
+        label: Розширена домедична допомога
+        rarity: common
+        tags[1]: medicine
+        weight: 1
+      - id: mechanical-repair
+        label: Ремонт механічних систем
+        rarity: common
+        tags[2]: technical,repair
+        weight: 1
+      - id: genetic-analysis
+        label: Генетичний аналіз
+        rarity: rare
+        tags[3]: science,genetics,laboratory
+        weight: 1
+      - id: negotiation
+        label: Переговори й деескалація
+        rarity: common
+        tags[2]: social,leadership
+        weight: 1
+      - id: stealth-movement
+        label: Безшумне пересування
+        rarity: common
+        tags[2]: survival,stealth
+        weight: 1
+      - id: animal-behavior
+        label: Розуміння поведінки тварин
+        rarity: common
+        tags[2]: animals,dinosaurs
+        weight: 1
+      - id: cartography
+        label: Картографія та орієнтування
+        rarity: common
+        tags[2]: exploration,navigation
+        weight: 1
+      - id: crisis-leadership
+        label: Керування командою в кризі
+        rarity: uncommon
+        tags[1]: leadership
+        weight: 1
+      - id: ration-cooking
+        label: Приготування їжі з обмежених запасів
+        rarity: common
+        tags[2]: food,logistics
+        weight: 1
+      - id: hydroponics
+        label: Гідропоніка
+        rarity: common
+        tags[2]: agriculture,technical
+        weight: 1
+      - id: analytical-chemistry
+        label: Аналітична хімія
+        rarity: common
+        tags[3]: science,chemistry,laboratory
+        weight: 1
+      - id: security-systems
+        label: Обслуговування систем безпеки
+        rarity: common
+        tags[2]: security,technical
+        weight: 1
+      - id: multilingual
+        label: Вільно володіє п’ятьма мовами
+        rarity: common
+        tags[2]: communications,social
+        weight: 1
+      - id: improvisation
+        label: Швидке створення рішень із підручних речей
+        rarity: common
+        tags[3]: craft,survival,repair
+        weight: 1
+  - id: character
+    label: Характер
+    values[14]:
+      - id: calm
+        label: Спокійний навіть під тиском
+        rarity: common
+        tags[1]: "character:calm"
+        weight: 1
+      - id: authoritarian
+        label: Авторитарний і впевнений у своїй правоті
+        rarity: common
+        tags[2]: "character:dominant","social:risk"
+        weight: 1
+      - id: empathetic
+        label: "Емпатичний, добре відчуває інших"
+        rarity: common
+        tags[2]: "character:empathetic",social
+        weight: 1
+      - id: suspicious
+        label: Підозрілий до чужих мотивів
+        rarity: common
+        tags[1]: "character:suspicious"
+        weight: 1
+      - id: adventurous
+        label: Шукає ризик і нові враження
+        rarity: common
+        tags[1]: "character:risk"
+        weight: 1
+      - id: disciplined
+        label: Дисциплінований і послідовний
+        rarity: common
+        tags[1]: "character:disciplined"
+        weight: 1
+      - id: conflictual
+        label: "Конфліктний, не поступається в суперечках"
+        rarity: common
+        tags[2]: "character:conflict","social:risk"
+        weight: 1
+      - id: humorous
+        label: Знімає напругу чорним гумором
+        rarity: common
+        tags[2]: "character:humor",social
+        weight: 1
+      - id: altruistic
+        label: Ставить групу вище за себе
+        rarity: common
+        tags[1]: "character:altruistic"
+        weight: 1
+      - id: pragmatic
+        label: Прагматичний і холодно рахує ризики
+        rarity: common
+        tags[2]: "character:pragmatic",strategy
+        weight: 1
+      - id: impulsive
+        label: Імпульсивний у критичні моменти
+        rarity: common
+        tags[2]: "character:impulsive","social:risk"
+        weight: 1
+      - id: secretive
+        label: Мовчазний і приховує наміри
+        rarity: common
+        tags[2]: "character:secretive",secrets
+        weight: 1
+      - id: persuasive
+        label: Переконливий оратор
+        rarity: uncommon
+        tags[2]: "character:persuasive",social
+        weight: 1
+      - id: stubborn
+        label: Надзвичайно впертий
+        rarity: common
+        tags[1]: "character:stubborn"
+        weight: 1
+  - id: physical-form
+    label: Фізична форма
+    values[14]:
+      - id: competitive-athlete
+        label: Рівень професійного спортсмена
+        rarity: rare
+        tags[2]: "fitness:excellent",mobility
+        weight: 1
+      - id: well-trained
+        label: Добра тренована форма
+        rarity: common
+        tags[2]: "fitness:good",mobility
+        weight: 1
+      - id: average-form
+        label: Середня фізична форма
+        rarity: common
+        tags[1]: "fitness:average"
+        weight: 1
+      - id: sedentary
+        label: Малорухливий спосіб життя
+        rarity: common
+        tags[1]: "fitness:low"
+        weight: 1
+      - id: exhausted
+        label: Сильне фізичне виснаження
+        rarity: common
+        tags[2]: "fitness:low",fatigue
+        weight: 1
+      - id: sprinter
+        label: Дуже швидкий на короткій дистанції
+        rarity: common
+        tags[2]: "fitness:good",speed
+        weight: 1
+      - id: endurance-runner
+        label: Висока витривалість
+        rarity: common
+        tags[2]: "fitness:good",endurance
+        weight: 1
+      - id: flexible
+        label: Виняткова гнучкість
+        rarity: common
+        tags[2]: "fitness:good",mobility
+        weight: 1
+      - id: upper-body-strength
+        label: Сильний верхній плечовий пояс
+        rarity: common
+        tags[2]: "fitness:good",strength
+        weight: 1
+      - id: limping
+        label: Пересувається з помітною кульгавістю
+        rarity: common
+        tags[2]: "fitness:limited",mobility-limited
+        weight: 1
+      - id: injury-recovery
+        label: Відновлюється після спортивної травми
+        rarity: common
+        tags[2]: "fitness:limited","health:stable"
+        weight: 1
+      - id: underweight
+        label: Недостатня маса тіла
+        rarity: common
+        tags[2]: "fitness:low","nutrition:risk"
+        weight: 1
+      - id: heavy-strong
+        label: "Велика вага, але значна фізична сила"
+        rarity: common
+        tags[2]: "fitness:average",strength
+        weight: 1
+      - id: active-senior
+        label: "Вікова, але активна й витривала людина"
+        rarity: uncommon
+        tags[2]: "fitness:good","age:senior"
+        weight: 1
+  - id: addiction
+    label: Залежність
+    values[14]:
+      - id: none
+        label: Виражених залежностей немає
+        rarity: uncommon
+        tags[1]: "addiction:none"
+        weight: 1
+      - id: nicotine
+        label: Нікотинова залежність
+        rarity: common
+        tags[1]: "addiction:substance"
+        weight: 1
+      - id: caffeine
+        label: Не функціонує без великої дози кофеїну
+        rarity: common
+        tags[1]: "addiction:substance"
+        weight: 1
+      - id: alcohol-remission
+        label: Алкогольна залежність у тривалій ремісії
+        rarity: common
+        tags[1]: "addiction:remission"
+        weight: 1
+      - id: gambling
+        label: Азартні ігри
+        rarity: common
+        tags[2]: "addiction:behavior","social:risk"
+        weight: 1
+      - id: social-media
+        label: Нав’язлива потреба в соціальних мережах
+        rarity: common
+        tags[1]: "addiction:behavior"
+        weight: 1
+      - id: painkillers-risk
+        label: Ризик залежності від знеболювальних
+        rarity: common
+        tags[2]: "addiction:substance",medicine-dependent
+        weight: 1
+      - id: adrenaline
+        label: Потреба в небезпечних відчуттях
+        rarity: common
+        tags[2]: "addiction:behavior","character:risk"
+        weight: 1
+      - id: workaholic
+        label: Трудоголізм
+        rarity: common
+        tags[1]: "addiction:behavior"
+        weight: 1
+      - id: sweets
+        label: Компульсивне споживання солодкого
+        rarity: common
+        tags[1]: "addiction:food"
+        weight: 1
+      - id: energy-drinks
+        label: Енергетичні напої
+        rarity: common
+        tags[2]: "addiction:substance","health:risk"
+        weight: 1
+      - id: sleeping-pills
+        label: Залежність від снодійного
+        rarity: common
+        tags[2]: "addiction:substance",medicine-dependent
+        weight: 1
+      - id: hoarding
+        label: Компульсивне накопичення речей
+        rarity: common
+        tags[2]: "addiction:behavior","logistics:risk"
+        weight: 1
+      - id: control
+        label: Психологічна потреба все контролювати
+        rarity: common
+        tags[2]: "addiction:behavior","character:dominant"
+        weight: 1
+  - id: moral-beliefs
+    label: Моральні переконання
+    values[14]:
+      - id: utilitarian
+        label: Найбільша користь для найбільшої кількості
+        rarity: common
+        tags[1]: "morality:utilitarian"
+        weight: 1
+      - id: humanist
+        label: Кожне людське життя має безумовну цінність
+        rarity: common
+        tags[1]: "morality:humanist"
+        weight: 1
+      - id: pacifist
+        label: Насильство неприйнятне майже за будь-яких умов
+        rarity: common
+        tags[1]: "morality:pacifist"
+        weight: 1
+      - id: survivalist
+        label: Виживання групи виправдовує жорсткі рішення
+        rarity: common
+        tags[1]: "morality:survivalist"
+        weight: 1
+      - id: religious-mercy
+        label: Милосердя й прощення важливіші за помсту
+        rarity: common
+        tags[2]: "morality:mercy",religion
+        weight: 1
+      - id: scientific-progress
+        label: Науковий прогрес вартий контрольованого ризику
+        rarity: common
+        tags[2]: "morality:science",science
+        weight: 1
+      - id: collective-democracy
+        label: Усі важливі рішення має приймати група
+        rarity: common
+        tags[2]: "morality:democracy",social
+        weight: 1
+      - id: strict-hierarchy
+        label: У кризі потрібна безумовна вертикаль влади
+        rarity: common
+        tags[2]: "morality:hierarchy","character:dominant"
+        weight: 1
+      - id: eco-radical
+        label: Природа важливіша за збереження людської цивілізації
+        rarity: common
+        tags[2]: "morality:eco",animals
+        weight: 1
+      - id: individualist
+        label: Людина насамперед відповідає за себе
+        rarity: common
+        tags[1]: "morality:individualist"
+        weight: 1
+      - id: duty-first
+        label: Обов’язок важливіший за особисті почуття
+        rarity: common
+        tags[2]: "morality:duty","character:disciplined"
+        weight: 1
+      - id: absolute-nonviolence
+        label: Не вб’є живу істоту навіть заради порятунку
+        rarity: uncommon
+        tags[2]: "morality:pacifist",animals
+        weight: 1
+      - id: retributive-justice
+        label: Зрада повинна каратися без винятків
+        rarity: common
+        tags[2]: "morality:punishment","social:risk"
+        weight: 1
+      - id: situational
+        label: Моральне правило залежить від обставин
+        rarity: common
+        tags[2]: "morality:pragmatic",strategy
+        weight: 1
+  - id: relationships
+    label: Стосунки
+    values[14]:
+      - id: single
+        label: Не має близьких стосунків
+        rarity: common
+        tags[1]: "relationship:none"
+        weight: 1
+      - id: partner-outside
+        label: Партнер залишився по інший бік аномалії
+        rarity: common
+        tags[2]: "relationship:partner","motivation:return"
+        weight: 1
+      - id: parent
+        label: Має малу дитину в сучасному світі
+        rarity: common
+        tags[2]: "relationship:child","motivation:return"
+        weight: 1
+      - id: newlywed
+        label: Одружився за тиждень до катастрофи
+        rarity: common
+        tags[2]: "relationship:partner","motivation:return"
+        weight: 1
+      - id: cares-for-parent
+        label: Був єдиним опікуном літнього родича
+        rarity: common
+        tags[2]: "relationship:family","motivation:return"
+        weight: 1
+      - id: divorced
+        label: Переживає важке розлучення
+        rarity: common
+        tags[2]: "relationship:former","social:risk"
+        weight: 1
+      - id: team-friend
+        label: Один з учасників — давній близький друг
+        rarity: common
+        tags[2]: "relationship:party",social
+        weight: 1
+      - id: team-rival
+        label: Один з учасників — професійний суперник
+        rarity: common
+        tags[2]: "relationship:party","social:risk"
+        weight: 1
+      - id: owes-life
+        label: Завдячує життям іншому учаснику
+        rarity: uncommon
+        tags[2]: "relationship:party",debt
+        weight: 1
+      - id: secret-romance
+        label: Приховує романтичні стосунки з учасником
+        rarity: uncommon
+        tags[2]: "relationship:party",secrets
+        weight: 1
+      - id: bereaved
+        label: Нещодавно втратив найближчу людину
+        rarity: common
+        tags[2]: "relationship:loss",trauma
+        weight: 1
+      - id: large-family
+        label: Виріс у великій родині й уміє ділити ресурси
+        rarity: common
+        tags[2]: "relationship:family",logistics
+        weight: 1
+      - id: foster-parent
+        label: Має досвід прийомного батьківства
+        rarity: common
+        tags[2]: "relationship:child",care
+        weight: 1
+      - id: community-leader
+        label: Очолював тісну місцеву громаду
+        rarity: common
+        tags[2]: "relationship:community",leadership
+        weight: 1
+  - id: special-condition
+    label: Особлива умова
+    values[14]:
+      - id: temporal-resonance
+        label: Відчуває наближення часових аномалій
+        rarity: rare
+        tags[2]: anomaly,time
+        weight: 1
+      - id: company-keycard
+        label: Має пошкоджену ключ-картку корпорації
+        rarity: uncommon
+        tags[2]: company,security
+        weight: 1
+      - id: partial-immunity
+        label: Організм стійкий до місцевих токсинів
+        rarity: rare
+        tags[2]: "health:advantage",biology
+        weight: 1
+      - id: lab-code-fragment
+        label: Пам’ятає частину коду лабораторії
+        rarity: uncommon
+        tags[2]: laboratory,knowledge
+        weight: 1
+      - id: company-agent
+        label: Таємно працював на компанію-власника бази
+        rarity: rare
+        tags[2]: company,secrets
+        weight: 1
+      - id: tracking-beacon
+        label: У тілі є невідомий активний маячок
+        rarity: uncommon
+        tags[2]: company,danger
+        weight: 1
+      - id: noise-panic
+        label: Під час тривалої сирени втрачає контроль
+        rarity: common
+        tags[2]: "fear:noise","health:risk"
+        weight: 1
+      - id: night-vision
+        label: Надзвичайно добре бачить у сутінках
+        rarity: uncommon
+        tags[2]: vision,stealth
+        weight: 1
+      - id: dinosaur-scent
+        label: "Одяг забруднений речовиною, яка приваблює хижаків"
+        rarity: rare
+        tags[2]: dinosaurs,danger
+        weight: 1
+      - id: future-message
+        label: Має запис повідомлення від власного майбутнього
+        rarity: rare
+        tags[2]: anomaly,secrets
+        weight: 1
+      - id: blood-compatible
+        label: Універсальний донор крові
+        rarity: uncommon
+        tags[2]: medicine,"health:advantage"
+        weight: 1
+      - id: sterile-suit
+        label: Захисний костюм витримає одну небезпечну експедицію
+        rarity: uncommon
+        tags[2]: survival,laboratory
+        weight: 1
+      - id: dino-embryo
+        label: Несвідомо переносить заморожений ембріон динозавра
+        rarity: rare
+        tags[3]: dinosaurs,secrets,danger
+        weight: 1
+      - id: no-special-condition
+        label: Особливих умов немає
+        rarity: common
+        tags[1]: "special:none"
+        weight: 1
+contentWarnings[5]: небезпека й загибель людей,напади тварин,медичні стани,залежності,чорний гумор
+coreObjective: enter_bunker_and_preserve_demography
+demography:
+  rule: standard
+durationMinutes:
+  max: 150
+  min: 60
+finalPlans[3]:
+  - id: scientific
+    requiredTags[3]: science,genetics,laboratory
+    title: Науковий
+  - id: technical
+    requiredTags[3]: technical,repair,energy
+    title: Технічний
+  - id: force
+    requiredTags[3]: combat,survival,leadership
+    title: Силовий
+id: operation-chalk
+locale: uk-UA
+meters[1]:
+  - id: predator-attention
+    initialValue: 1
+    max: 10
+    min: 0
+    thresholds[2]{at,effectId,label}:
+      6,predator_attention.threshold_danger,Хижаки біля периметра
+      9,predator_attention.threshold_incursion,Спроба проникнення
+    title: Увага хижаків
+playerRange:
+  max: 16
+  min: 4
+registeredEffectIds[29]: card.cancel,card.copy,card.draw,card.recover,characteristic.cure_infertility,characteristic.force_reroll,characteristic.force_reveal,characteristic.hide,characteristic.inspect,characteristic.reveal_extra,characteristic.reroll_unrevealed,characteristic.swap,game.pause_request,order.swap,player.protect,player.revive,player.swap_baggage,player.swap_profession,predator_attention.threshold_danger,predator_attention.threshold_incursion,time.extend,time.reduce,vote.add,vote.block,vote.double,vote.redirect,vote.remove,vote.reveal_total,vote.silence
+resources[5]:
+  - id: energy
+    initialValue: 6
+    max: 10
+    min: 0
+    tags[2]: technical,energy
+    title: Енергія
+  - id: supplies
+    initialValue: 7
+    max: 10
+    min: 0
+    tags[3]: food,water,logistics
+    title: Запаси
+  - id: integrity
+    initialValue: 8
+    max: 10
+    min: 0
+    tags[2]: bunker,repair
+    title: Цілісність бункера
+  - id: lab-data
+    initialValue: 1
+    max: 6
+    min: 0
+    tags[3]: science,laboratory,genetics
+    title: Лабораторні дані
+  - id: materials
+    initialValue: 4
+    max: 8
+    min: 0
+    tags[3]: technical,craft,repair
+    title: Матеріали
+reveals[5]{id,order,text,title}:
+  bunker-origin,1,"База належала компанії, яка створила динозаврів. У її даних можуть бути відомості про слабкі місця тварин.",Походження бункера
+  they-feel-bunker,2,"Генератор, майстерня, ліфт і радіопередавач створюють сигнали, що поступово привертають хижаків.",Вони відчувають бункер
+  natural-breeding,3,Частина динозаврів здатна природно розмножуватися. Нове покоління не матиме закладеного обмеження строку життя.,Проблема не зникне сама
+  technical-tunnel,4,Технічний тунель веде до інкубатора нового покоління й одночасно містить частину вентиляції бункера.,Технічний тунель
+  last-opportunity,5,Лабораторія може створити генетичний пригнічувач. Альтернативи — знищити інкубатор або заблокувати тунель.,Остання можливість
+schemaVersion: 1
+secretGoals[12]:
+  - description: Завершіть гру з щонайменше чотирма одиницями лабораторних даних.
+    id: preserve-scientific-archive
+    requiresBunker: true
+    title: Науковий архів
+    impact: personal
+    resolution: engine
+  - description: Не дозвольте шкалі уваги хижаків досягти дев’яти.
+    id: keep-silence
+    requiresBunker: true
+    title: Тиша понад усе
+    impact: personal
+    resolution: engine
+  - description: Доможіться знищення інкубатора незалежно від основного плану.
+    id: destroy-incubator
+    requiresBunker: true
+    title: Жодного нового покоління
+    impact: personal
+    resolution: engine
+  - description: Збережіть яйце динозавра до фіналу й не розкривайте мотив.
+    id: save-egg
+    requiresBunker: true
+    title: Останній зразок
+    impact: personal
+    resolution: host
+  - description: "Зробіть так, щоб корпоративні дані пережили фінал."
+    id: company-archive
+    requiresBunker: true
+    title: Наказ компанії
+    impact: personal
+    resolution: engine
+  - description: Особисто потрапте до бункера й підтримайте план повернення додому.
+    id: return-home
+    requiresBunker: true
+    title: Повернутися за будь-яку ціну
+    impact: personal
+    resolution: host
+  - description: Переконайте групу принаймні двічі підтримати запропоноване вами рішення.
+    id: prove-leadership
+    requiresBunker: true
+    title: Лідер кризи
+    impact: personal
+    resolution: host
+  - description: Завершіть гру із запасом енергії не менше п’яти.
+    id: preserve-energy
+    requiresBunker: true
+    title: Резерв живлення
+    impact: personal
+    resolution: engine
+  - description: У фінальній команді має бути персонаж із тегом medicine.
+    id: keep-medic
+    requiresBunker: true
+    title: Медична гарантія
+    impact: personal
+    resolution: engine
+  - description: У фінальній команді має бути персонаж із тегом technical.
+    id: keep-engineer
+    requiresBunker: true
+    title: Системи мають працювати
+    impact: personal
+    resolution: engine
+  - description: "Не використовуйте картки, які прямо додають голос іншому гравцеві."
+    id: clean-hands
+    requiresBunker: true
+    title: Чисті руки
+    impact: personal
+    resolution: engine
+  - description: Особисто потрапте до бункера й доможіться максимальної уваги хижаків до фіналу.
+    id: predator-cult
+    requiresBunker: true
+    title: Поклик хижаків
+    fulfilledOutcome: team_loss
+    impact: team_outcome
+    resolution: host
+    unfulfilledOutcome: keep_base_result
+status: draft
+summary: Сучасні люди через часову аномалію опинилися в епосі динозаврів і знайшли корпоративний підземний комплекс.
+title: Операція крейда
+tone[4]: пригодницький трилер,напруга,загадка,чорний гумор
+version: 0.1.0

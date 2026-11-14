@@ -1,0 +1,40 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "bunker-edge",
+  "account_id": "REPLACE_WITH_YOUR_CLOUDFLARE_ACCOUNT_ID",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-07-27",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "../web/dist",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*", "/health"]
+  },
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1,
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 1,
+      "invocation_logs": true,
+      "persist": true
+    }
+  },
+  "env": {
+    "staging": {
+      "workers_dev": true,
+      "preview_urls": true
+    },
+    "production": {
+      "account_id": "REPLACE_WITH_YOUR_CLOUDFLARE_ACCOUNT_ID",
+      "workers_dev": false,
+      "preview_urls": false,
+      "routes": [
+        { "pattern": "bunker.f3mida.tech", "custom_domain": true }
+      ],
+      "secrets": {
+        "required": ["ORIGIN_HTTP_URL", "ORIGIN_SERVICE_TOKEN"]
+      }
+    }
+  }
+}

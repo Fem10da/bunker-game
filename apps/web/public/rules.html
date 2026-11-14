@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#f2ecda" />
+    <meta
+      name="description"
+      content="Короткі правила гри Бункер: підготовка, хід партії, таймери, картки, голосування та умова перемоги."
+    />
+    <title>Бункер — правила гри</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --paper: #f2ecda;
+        --paper-2: #e7ddc0;
+        --ink: #241f14;
+        --ink-soft: #6b6047;
+        --rust: #a8431f;
+        --olive: #4a5a37;
+        --olive-soft: #7c8a63;
+        --line: #c8b98f;
+        --card-action: #a8431f;
+        --card-reaction: #3c5a72;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --paper: #161409;
+          --paper-2: #1f1c10;
+          --ink: #ecdfc0;
+          --ink-soft: #a89972;
+          --rust: #e2733f;
+          --olive: #93a675;
+          --olive-soft: #7c8a63;
+          --line: #453d24;
+          --card-action: #e2733f;
+          --card-reaction: #6fa0c4;
+        }
+      }
+      :root[data-theme="dark"] {
+        --paper: #161409;
+        --paper-2: #1f1c10;
+        --ink: #ecdfc0;
+        --ink-soft: #a89972;
+        --rust: #e2733f;
+        --olive: #93a675;
+        --olive-soft: #7c8a63;
+        --line: #453d24;
+        --card-action: #e2733f;
+        --card-reaction: #6fa0c4;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        background: var(--paper);
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "Spectral", Georgia, serif;
+        padding: 0 16px;
+        padding-block: max(28px, env(safe-area-inset-top))
+          max(60px, env(safe-area-inset-bottom));
+        line-height: 1.55;
+      }
+      .sheet {
+        max-width: 740px;
+        margin: 0 auto;
+      }
+      .eyebrow {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 10px;
+        margin-bottom: 22px;
+      }
+      header.cover {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 34px;
+      }
+      .cover h1 {
+        font-family: "Oswald", sans-serif;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: clamp(34px, 8vw, 58px);
+        line-height: 0.96;
+        letter-spacing: 0.01em;
+        margin: 0;
+      }
+      .cover h1 span {
+        display: block;
+        color: var(--rust);
+        font-size: 0.42em;
+        letter-spacing: 0.22em;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+      .stamp {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        border: 1.5px solid var(--rust);
+        color: var(--rust);
+        padding: 7px 10px;
+        transform: rotate(-3deg);
+        white-space: nowrap;
+        border-radius: 2px;
+      }
+      .premise {
+        font-style: italic;
+        color: var(--ink-soft);
+        border-left: 3px solid var(--olive-soft);
+        padding-left: 14px;
+        margin: 0 0 36px;
+        max-width: 56ch;
+      }
+
+      section {
+        margin-bottom: 40px;
+      }
+      .sec-head {
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 8px;
+        margin-bottom: 16px;
+      }
+      .sec-head .no {
+        font-family: "IBM Plex Mono", monospace;
+        color: var(--rust);
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .sec-head h2 {
+        font-family: "Oswald", sans-serif;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 20px;
+        letter-spacing: 0.03em;
+        margin: 0;
+      }
+      p {
+        margin: 0 0 12px;
+      }
+      ul,
+      ol {
+        margin: 0 0 12px;
+        padding-left: 1.25em;
+      }
+      li {
+        margin-bottom: 6px;
+      }
+      strong {
+        color: var(--ink);
+      }
+
+      table.timers {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 14px;
+      }
+      .timers th {
+        text-align: left;
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+        font-weight: 600;
+        padding: 0 10px 8px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .timers td {
+        padding: 11px 10px 11px 0;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+      .timers tr:last-child td {
+        border-bottom: none;
+      }
+      .timers .t {
+        font-variant-numeric: tabular-nums;
+        font-weight: 600;
+        color: var(--rust);
+        white-space: nowrap;
+        font-size: 16px;
+      }
+      .timers .name {
+        font-family: "Spectral", serif;
+        font-weight: 600;
+        color: var(--ink);
+        font-size: 14.5px;
+      }
+      .timers .note {
+        color: var(--ink-soft);
+        font-family: "Spectral", serif;
+        font-size: 13.5px;
+      }
+      .callout {
+        background: var(--paper-2);
+        border: 1px solid var(--line);
+        border-left: 3px solid var(--rust);
+        padding: 12px 14px;
+        margin-top: 14px;
+        font-size: 14.5px;
+        border-radius: 2px;
+      }
+      .callout b {
+        color: var(--rust);
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .chip {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12.5px;
+        letter-spacing: 0.02em;
+        border: 1px solid var(--olive-soft);
+        color: var(--olive);
+        padding: 6px 10px;
+        border-radius: 20px;
+      }
+
+      .cardgrid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      @media (max-width: 520px) {
+        .cardgrid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .cardbox {
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 14px 16px;
+        background: var(--paper-2);
+      }
+      .cardbox .tag {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        font-weight: 600;
+        display: inline-block;
+        padding: 3px 8px;
+        border-radius: 2px;
+        margin-bottom: 10px;
+      }
+      .cardbox.action .tag {
+        background: color-mix(in srgb, var(--card-action) 18%, transparent);
+        color: var(--card-action);
+      }
+      .cardbox.reaction .tag {
+        background: color-mix(in srgb, var(--card-reaction) 18%, transparent);
+        color: var(--card-reaction);
+      }
+      .cardbox p {
+        font-size: 14px;
+        margin-bottom: 8px;
+      }
+      .cardbox .ex {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        color: var(--ink-soft);
+      }
+
+      .flow {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        counter-reset: step;
+      }
+      .flow li {
+        counter-increment: step;
+        display: flex;
+        gap: 12px;
+        padding: 9px 0;
+        border-bottom: 1px dashed var(--line);
+        font-size: 14.5px;
+      }
+      .flow li:last-child {
+        border-bottom: none;
+      }
+      .flow li::before {
+        content: counter(step);
+        font-family: "IBM Plex Mono", monospace;
+        font-weight: 600;
+        color: var(--rust);
+        min-width: 1.4em;
+      }
+
+      .paths {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .path {
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 14px 16px;
+        background: var(--paper-2);
+      }
+      .path .ptitle {
+        font-family: "Oswald", sans-serif;
+        text-transform: uppercase;
+        font-size: 13px;
+        letter-spacing: 0.06em;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+      .path.core .ptitle {
+        color: var(--olive);
+      }
+      .path.alt .ptitle {
+        color: var(--rust);
+      }
+      .path p {
+        font-size: 14px;
+        margin-bottom: 0;
+      }
+      .or-divider {
+        text-align: center;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.15em;
+        color: var(--ink-soft);
+        margin: -4px 0;
+      }
+
+      footer {
+        margin-top: 48px;
+        padding-top: 14px;
+        border-top: 1px solid var(--line);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sheet">
+      <div class="eyebrow">
+        <span>Гравців: 4–16</span>
+        <span>bunker.f3mida.tech</span>
+      </div>
+
+      <header class="cover">
+        <h1><span>Короткі правила</span>Бункер</h1>
+        <div class="stamp">Читати перед грою</div>
+      </header>
+
+      <p class="premise">
+        Сталася катастрофа. Внизу є єдиний вцілілий бункер — але місць у
+        ньому вдвічі менше, ніж людей нагорі. Гравці по черзі розкривають
+        свої характеристики, переконують інших, чому саме їм місце в
+        бункері належить по праву, і зрештою голосують, хто залишається на
+        поверхні.
+      </p>
+
+      <section>
+        <div class="sec-head"><span class="no">01</span><h2>Мета</h2></div>
+        <p>
+          Потрапити в число тих, хто займе місце в бункері. Місткість
+          бункера — це <strong>половина від кількості гравців, округлена
+          вгору</strong> (наприклад, на 15 гравців — 8 місць, на 16 — 8
+          місць). Решта лишаються на поверхні й вибувають з гри.
+        </p>
+        <p>
+          Але зайняти місця недостатньо: перед закриттям бункера
+          перевіряється <strong>демографія</strong> — чи є серед фіналістів
+          шанс на продовження роду (розділ 08). Якщо демографію не
+          збережено — не рятується ніхто, навіть ті, хто «пройшов».
+        </p>
+      </section>
+
+      <section>
+        <div class="sec-head"><span class="no">02</span><h2>Підготовка</h2></div>
+        <ul>
+          <li>
+            Кожен гравець отримує закриту картку долі з 7 характеристиками
+            та одну особисту картку дії/реакції.
+          </li>
+          <li>
+            Умови катастрофи, розмір бункера та запаси рандомізуються під
+            кожну партію — на початку ведучий (та екран проєктора)
+            оголошує сценарій.
+          </li>
+          <li>
+            За бажанням компанії можна увімкнути таємні особисті цілі —
+            тоді кожен гравець отримує ще й закрите завдання.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <div class="sec-head"><span class="no">03</span><h2>Хід партії</h2></div>
+        <ol class="flow">
+          <li>
+            <strong>Раунд 1 — Професія.</strong> Кожен по черзі відкриває
+            лише характеристику «Професія».
+          </li>
+          <li>
+            <strong>Раунд 2+ — Розкриття.</strong> Кожен по черзі відкриває
+            одну будь-яку ще закриту характеристику і аргументує, чому має
+            лишитись.
+          </li>
+          <li>
+            <strong>Обговорення.</strong> Коли всі активні гравці відходили
+            за раунд — 3 хвилини вільної дискусії за столом.
+          </li>
+          <li>
+            <strong>Голосування.</strong> Всі одночасно голосують, кого
+            вивести з бункера.
+          </li>
+          <li>
+            <strong>Перевірка місць.</strong> Якщо активних гравців усе ще
+            більше за місткість бункера — новий раунд розкриття. Якщо ні —
+            фінальна перевірка.
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <div class="sec-head"><span class="no">04</span><h2>Таймери</h2></div>
+        <table class="timers">
+          <tr>
+            <th>Фаза</th>
+            <th>Час</th>
+            <th>Що саме</th>
+          </tr>
+          <tr>
+            <td class="name">Хід гравця</td>
+            <td class="t">1:30</td>
+            <td class="note">
+              Один спільний таймер на <em>вибір</em> характеристики й саму
+              <em>промову</em> про неї — не два окремих. Він тече без
+              зупинки від початку ходу до кінця, тож на середині ви
+              побачите «1:00», далі «0:30» тощо — це той самий таймер, не
+              новий. Діє й у раунді 1 (там доступна лише «Професія»).
+            </td>
+          </tr>
+          <tr>
+            <td class="name">Вікно реакції</td>
+            <td class="t">0:15</td>
+            <td class="note">
+              Вмикається, лише коли хтось під час свого ходу розігрує
+              картку дії. Таймер ходу на цей час ставиться на паузу й не
+              витрачається.
+            </td>
+          </tr>
+          <tr>
+            <td class="name">Обговорення</td>
+            <td class="t">3:00</td>
+            <td class="note">
+              Раз на раунд, після ходів усіх активних гравців. Фіксований
+              час, картки на нього не впливають.
+            </td>
+          </tr>
+          <tr>
+            <td class="name">Голосування</td>
+            <td class="t">—</td>
+            <td class="note">
+              Без ліміту: чекає, поки проголосують усі активні гравці.
+            </td>
+          </tr>
+          <tr>
+            <td class="name">Фінальна перевірка</td>
+            <td class="t">—</td>
+            <td class="note">
+              Без ліміту: ведучий вручну підбиває підсумок демографії та
+              сценарію.
+            </td>
+          </tr>
+        </table>
+        <div class="callout">
+          <b>Модифікатори ходу:</b> деякі картки продовжують поточний хід
+          на +0:30 або скорочують хід наступного гравця на −0:30. Хід
+          ніколи не стає коротшим за 0:15, скільки б карток на нього не
+          наклали.
+        </div>
+      </section>
+
+      <section>
+        <div class="sec-head">
+          <span class="no">05</span><h2>Характеристики</h2>
+        </div>
+        <p>
+          У кожного гравця сім прихованих характеристик — розкриваються
+          поступово, по одній за хід:
+        </p>
+        <div class="chips">
+          <span class="chip">Професія</span>
+          <span class="chip">Вік і стать</span>
+          <span class="chip">Здоров'я</span>
+          <span class="chip">Хобі</span>
+          <span class="chip">Багаж</span>
+          <span class="chip">Характер</span>
+          <span class="chip">Особливе</span>
+        </div>
+      </section>
+
+      <section>
+        <div class="sec-head"><span class="no">06</span><h2>Картки</h2></div>
+        <div class="cardgrid">
+          <div class="cardbox action">
+            <span class="tag">Дія</span>
+            <p>
+              Розігрується у власний хід. Впливає на характеристики, голоси
+              чи хід інших гравців — наприклад, змушує когось
+              перегенерувати відкриту рису або забирає в когось голос.
+            </p>
+            <p class="ex">напр. «Дискредитація», «Фейковий диплом»</p>
+          </div>
+          <div class="cardbox reaction">
+            <span class="tag">Реакція</span>
+            <p>
+              Розігрується у відповідь, поки триває 15-секундне вікно
+              реакції. Може скасувати картку дії, захистити ціль або
+              перенаправити ефект.
+            </p>
+            <p class="ex">напр. захист, скасування, копіювання дії</p>
+          </div>
+        </div>
+        <div class="callout">
+          <b>Скасування:</b> якщо на картку дії відповідає рівно
+          <b>одна</b> реакція — дія скасовується. Якщо реакцій нуль або
+          одразу дві — дія все одно спрацьовує.
+        </div>
+      </section>
+
+      <section>
+        <div class="sec-head">
+          <span class="no">07</span><h2>Голосування й вибування</h2>
+        </div>
+        <ol class="flow">
+          <li>Кожен активний гравець голосує проти одного іншого.</li>
+          <li>Найбільше голосів — вибуває з бункера (лишається на поверхні).</li>
+          <li>
+            Нічия між кількома гравцями — переголосування тільки серед
+            них, до 3 спроб.
+          </li>
+          <li>Нічия й на третій спробі — цього раунду не вибуває ніхто.</li>
+        </ol>
+        <p>
+          <strong>Вибулий гравець</strong> лишається в застосунку як
+          спостерігач: бачить перебіг партії, але більше не голосує, не
+          відкриває характеристики й не реагує картками.
+        </p>
+      </section>
+
+      <section>
+        <div class="sec-head">
+          <span class="no">08</span><h2>Демографія бункера</h2>
+        </div>
+        <p>
+          Коли місця у бункері заповнено, перевіряється, чи виживе
+          людство. Досить <strong>одного</strong> з двох шляхів:
+        </p>
+        <div class="paths">
+          <div class="path core">
+            <div class="ptitle">Основний шлях — обов'язкова умова</div>
+            <p>
+              Серед фіналістів є хоча б одна жінка 18–49 років
+              <strong>і</strong> хоча б один чоловік 18–64 років.
+            </p>
+          </div>
+          <div class="or-divider">— або —</div>
+          <div class="path alt">
+            <div class="ptitle">Альтернативний шлях</div>
+            <p>
+              Серед фіналістів є людина з репродуктивною здатністю без
+              стандартної пари, <strong>і</strong> в бункері доступна
+              допомога — набір для інсемінації або репродуктолог.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="sec-head"><span class="no">09</span><h2>Фінал</h2></div>
+        <p>
+          Ведучий підбиває підсумок: якщо демографію збережено — усі
+          фіналісти рятуються. Якщо ні — бункер не витримує, і партія
+          завершується поразкою команди, попри заповнені місця.
+        </p>
+      </section>
+
+      <section>
+        <div class="sec-head">
+          <span class="no">10</span><h2>Зв'язок і збої</h2>
+        </div>
+        <p>
+          Застосунок не має вбудованого голосового чату — обговорення й
+          виступи ведуться голосом (у дзвінку чи наживо за столом), а
+          застосунок лише показує таймери, картки та голосування.
+        </p>
+        <p>
+          Якщо телефон завис, згорнувся чи втратив мережу — просто
+          відкрийте застосунок знову: стан партії збережено на сервері,
+          а не на пристрої. Дії ведучого (фінальний вердикт, підтвердження
+          після відкату) чекають лише на нього — якщо ведучий довго не
+          відповідає, зверніться до нього напряму.
+        </p>
+      </section>
+
+      <footer>
+        <span>Бункер</span>
+        <span>Коротка версія для столу</span>
+      </footer>
+    </div>
+  </body>
+</html>

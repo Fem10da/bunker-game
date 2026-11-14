@@ -1,0 +1,23 @@
+{
+  "name": "@bunker/content",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@bunker/contracts": "workspace:*",
+    "@toon-format/toon": "^4.0.0",
+    "zod": "^4.4.3"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "generate:operation-chalk": "tsx scripts/build-operation-chalk.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "validate": "tsx src/cli.ts ../../content/scenarios/operation-chalk.toon"
+  }
+}
